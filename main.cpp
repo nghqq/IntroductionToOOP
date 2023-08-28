@@ -28,7 +28,7 @@ public:
 	void set_x(double x)  // Получить значение 'x'
 	{
 		this->x = x;
-	}
+	} 
 	void set_y(double y)  // Получить значение 'y'
 	{
 		this->y = y;
