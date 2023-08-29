@@ -96,7 +96,7 @@ Point(double x)
 			y++;
 			return *this;
 	}
-	Point operator++(int) 
+	Point operator++(int)  //Postfix Increment
 	{
 		Point old = *this;
 		x++;
@@ -117,6 +117,11 @@ Point(double x)
 	void print()const
 	{
 		std::cout << "X = " << x << "\tY = " << y << std::endl;
+	}
+
+	double distance(Point other) 
+	{
+		double x_distance
 	}
 
 };
@@ -146,6 +151,7 @@ Point(double x)
 //#define STRUCT_POINT
 //#define CONSTRUCTORS_CHECK
 //#define ASSIGNMENT_CHECK
+#define OPERATOR_CHECK
  void main()
  {
 	 setlocale(LC_ALL, "");
@@ -203,6 +209,7 @@ Point(double x)
 #endif // ASSIGNMENT_CHECK
 
 
+#ifdef OPERATOR_CHECK
 	 Point A(2, 3);
 	 A.print();
 
@@ -231,6 +238,8 @@ Point(double x)
 
 	 A(33, 44);
 	 A.print();
+#endif // OPERATOR_CHECK
+
 }
 
 
