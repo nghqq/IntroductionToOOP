@@ -1,6 +1,7 @@
 #include <iostream>
 
 #define tab "\t"
+#define delimeter  "\n--------------------------------------------\n"
 
 
 //double Sqrt(double x);
@@ -73,7 +74,7 @@ Point(double x)
 
 	//Assignment operator:
 
-	Point operator =(const Point& other)
+	Point& operator =(const Point& other)
 	{
 		this->x = other.x;
 		this->y = other.y;
@@ -119,9 +120,15 @@ Point(double x)
 		std::cout << "X = " << x << "\tY = " << y << std::endl;
 	}
 
-	double distance(Point other) 
+	double distance(Point& other) 
 	{
-		double x_distance
+		double x_distance = this->x - other.x;
+		double y_distance = this->y - other.y;
+		double distance = sqrt(x_distance * x_distance + y_distance * y_distance);
+		return distance;
+		//this  - A
+		//other -  B
+
 	}
 
 };
@@ -150,8 +157,9 @@ Point(double x)
  
 //#define STRUCT_POINT
 //#define CONSTRUCTORS_CHECK
-//#define ASSIGNMENT_CHECK
-#define OPERATOR_CHECK
+#define ASSIGNMENT_CHECK
+//#define OPERATOR_CHECK
+//#define DISTANCE_CHECK
  void main()
  {
 	 setlocale(LC_ALL, "");
@@ -201,11 +209,15 @@ Point(double x)
 #ifdef ASSIGNMENT_CHECK
 	 int a, b, c;
 	 a = b = c = 0;
+	 std::cout << delimeter;
 	 std::cout << a << tab << b << tab << c << std::endl;
+	 std::cout << delimeter;
 
 
 	 Point A, B, C;
+	 std::cout << delimeter;
 	 A = B = C = Point(4, 4);
+	 std::cout << delimeter;
 #endif // ASSIGNMENT_CHECK
 
 
@@ -239,6 +251,12 @@ Point(double x)
 	 A(33, 44);
 	 A.print();
 #endif // OPERATOR_CHECK
+
+#ifdef DISTANCE_CHECK
+	 Point A(7, 8);
+	 Point B(2, 3);
+	 std::cout << "Расттояние от точки A  до точки B: " << A.distance(B) << std::endl;
+#endif // DISTANCE_CHECK
 
 }
 
