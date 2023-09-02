@@ -91,7 +91,7 @@ Point(double x)
 					
 														//Increment/Decrement:
 
-	Point operator++()      //Prefix Increment
+	Point& operator++()      //Prefix Increment
 	{
 			x++;
 			y++;
