@@ -99,6 +99,15 @@ public:
 		std::cout << "CopyAssignment: \t" << std::endl;
 		return *this;
 	}
+	String& operator = (String&& other) 
+	{
+		if (this == &other) return *this;
+		this->size = other.size;
+		this->str = other.str;
+		other.size = 0;
+		other.str = nullptr;
+		std::cout << "MoveAssignment: \t" << std::endl;
+	}
 
 
 	//Methods:
