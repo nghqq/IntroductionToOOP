@@ -22,6 +22,7 @@ public:
 	{
 		return str;
 	}
+	
 
 					//Constructors:
 
@@ -95,13 +96,11 @@ public:
 	String operator +(String left, String right) 
 	{
 		String result;
-		return result
-		(
-			left.get_size() + right.get_size()
-			
-		);
-			
-	
+		char*result = new char[right.get_size() + left.get_size()] {}
+		//result.get_size() = left.get_size() + right.get_size();
+		result.get_str() = left.get_str() + right.get_str();
+		return result;
+
 	}
 
 

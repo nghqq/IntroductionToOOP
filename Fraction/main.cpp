@@ -109,7 +109,7 @@ public:
 	}
 	
 
-						//Increment/Decrement
+						//Increment/Decrement:
 
 	Fraction& operator++()
 	{
@@ -123,7 +123,20 @@ public:
 		return old;
 	}
 
+	Fraction& operator--()
+	{
+		integer--;
+		return *this;
+	}
 
+	Fraction operator--(int)
+	{
+		Fraction old = *this;
+		integer--;
+		return old;
+	}
+
+						//Type-cast operators:
 	operator int() 
 	{
 		return to_proper().integer;
@@ -134,9 +147,18 @@ public:
 		return integer + (double)numerator / denominator;
 	}
 
+	//operator Fraction() 
+	//{
+		//return integer + denominator * (double)numerator;
+	//}
+
+
+
+
 
 
 	//Methods
+
 
 
 	Fraction& to_improper()
@@ -350,6 +372,7 @@ Fraction operator -(Fraction left, Fraction right)
 
 //#define CONSTRUCTORS_CHECK
 //#define CONVERSION_FROM_OTHER_TO_CLASS
+//#define CONVERSION_FROM_CLASS_TO_OTHER
 void main() 
 {
 	setlocale(LC_ALL, "");
@@ -407,6 +430,7 @@ void main()
 	B = Fraction(8);
 #endif // CONVERSION_FROM_OTHER_TO_CLASS
 	
+#ifdef CONVERSION_FROM_CLASS_TO_OTHER
 	Fraction Y(52, 10);
 	int y = (int)Y;
 	std::cout << y << std::endl;
@@ -414,8 +438,15 @@ void main()
 	Fraction Z(2, 3, 4);
 	double z = Z;
 	std::cout << z << std::endl;
+#endif // CONVERSION_FROM_CLASS_TO_OTHER
+
 
 	//Fraction X;
 	//std::cout << "Введите простую дробь: "; std::cin >> X;
 	//std::cout << X << std::endl;
+
+	Fraction B(2, 3, 4);
+	std::cout << B << std::endl;
+	//Fraction A = 2.75;
+	//std::cout << A << std::endl;
 }
