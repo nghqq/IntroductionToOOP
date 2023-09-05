@@ -50,6 +50,16 @@ public:
 		this->denominator = 1;
 		std::cout << "DefaultContstuctor: \t" << this << std::endl;
 	}
+	Fraction(double decimal) 
+	{
+		decimal += 1e-10;
+		integer = decimal;
+		decimal -= integer;
+		denominator = 1e+9;
+		numerator = decimal * denominator;
+		reduce();
+		std::cout << "DoubleContstuctor: \t" << this << std::endl;
+	}
 
 	explicit Fraction(int integer)
 	{
@@ -146,16 +156,6 @@ public:
 	{
 		return integer + (double)numerator / denominator;
 	}
-
-	//operator Fraction() 
-	//{
-		//return integer + denominator * (double)numerator;
-	//}
-
-
-
-
-
 
 	//Methods
 
@@ -447,6 +447,6 @@ void main()
 
 	Fraction B(2, 3, 4);
 	std::cout << B << std::endl;
-	//Fraction A = 2.75;
-	//std::cout << A << std::endl;
+	Fraction A = 2.75;
+	std::cout << A << std::endl;
 }

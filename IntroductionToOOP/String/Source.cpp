@@ -1,13 +1,13 @@
 #include<iostream>
 
-class String 
+class String
 {
 	int size; // размер строки
 	char* str; // адрес строки в динамической памяти
 
 public:
 
-	int get_size()const 
+	int get_size()const
 	{
 		return size;
 	}
@@ -15,25 +15,20 @@ public:
 	{
 		this->size = size;
 	}
-
-	
-
 	const char* get_str()const
 	{
 		return str;
 	}
-	
 
-					//Constructors:
-
-	String(int size = 80) 
+	//Constructors:
+	String(int size = 80)
 	{
 		this->size = size;
 		this->str = new char[size] {};
 		std::cout << "DefaultConstuctor: \t" << this << std::endl;
 	}
 
-	String(const char* str) 
+	String(const char* str)
 	{
 		this->size = strlen(str) + 1;
 		this->str = new char[size] {};
@@ -44,7 +39,7 @@ public:
 		}
 		std::cout << "Constuctor: \t" << this << std::endl;
 	}
-	String(const String& other) 
+	String(const String& other)
 	{
 		this->size = other.size;
 		this->str = new char[size] {};
@@ -55,13 +50,13 @@ public:
 		std::cout << "CopyConstructor:\t" << this << std::endl;
 	}
 
-	~String() 
+	~String()
 	{
 		delete[] str;
 		std::cout << "Destructor: \t" << this << std::endl;
 	}
 
-			// Operators
+	// Operators
 
 	String& operator=(const String& other)
 	{
@@ -78,34 +73,31 @@ public:
 	}
 
 
-					//Methods:
+	//Methods:
 
-	void print()const 
+	void print()const
 	{
 		std::cout << "Size: \t" << size << std::endl;
 		std::cout << "Str: \t" << size << std::endl;
 	}
 
 };
-	std::ostream& operator<<(std::ostream& os,const String& obj)
-	{
-		return os << obj.get_str();
-	}
+std::ostream& operator<<(std::ostream& os, const String& obj)
+{
+	return os << obj.get_str();
+}
 
 
-	String operator +(String left, String right) 
-	{
-		String result;
-		char*result = new char[right.get_size() + left.get_size()] {}
-		//result.get_size() = left.get_size() + right.get_size();
-		result.get_str() = left.get_str() + right.get_str();
-		return result;
-
-	}
+String operator +(String left, String right)
+{
+	String result(right.get_size() + left.get_size() - 1);
+	
+	return result;
+}
 
 
 //#define CONSTRUCTOR_CHECK
-void main() 
+void main()
 {
 	setlocale(LC_ALL, "");
 
@@ -133,7 +125,7 @@ void main()
 	String str_3 = str_1 + str_2;
 
 	std::cout << str_3 << std::endl;
-	 
+
 }
 
 
