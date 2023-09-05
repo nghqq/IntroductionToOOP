@@ -1,5 +1,5 @@
-﻿#include <iostream>
-#define _CRT_SECURE_NO_WARNINGS
+﻿#define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
 
 
 class Fraction;
@@ -51,7 +51,7 @@ public:
 		std::cout << "DefaultContstuctor: \t" << this << std::endl;
 	}
 
-	Fraction(int integer)
+	explicit Fraction(int integer)
 	{
 		this->integer = integer;
 		this->numerator = 0;
@@ -121,6 +121,17 @@ public:
 		Fraction old = *this;
 		integer++;
 		return old;
+	}
+
+
+	operator int() 
+	{
+		return to_proper().integer;
+	}
+
+	operator double()
+	{
+		return integer + (double)numerator / denominator;
 	}
 
 
@@ -338,6 +349,7 @@ Fraction operator -(Fraction left, Fraction right)
 
 
 //#define CONSTRUCTORS_CHECK
+//#define CONVERSION_FROM_OTHER_TO_CLASS
 void main() 
 {
 	setlocale(LC_ALL, "");
@@ -355,9 +367,10 @@ void main()
 	D.print();
 #endif // CONSTRUCTORS_CHECK
 
+#ifdef SOMETHINK_CHECK
 	Fraction A(2, 3, 4);
 	A.print();
-	
+
 
 	Fraction B(3, 4, 5);
 	B.print();
@@ -374,7 +387,7 @@ void main()
 
 	Fraction G = A - B;
 	G.print();
-	
+
 
 	A *= B;
 	A.print();
@@ -382,7 +395,25 @@ void main()
 
 	A /= B;
 	A.print();
+#endif // SOMETHINK_CHECK
 
+#ifdef CONVERSION_FROM_OTHER_TO_CLASS
+
+
+
+	Fraction Y = (Fraction)5;
+	std::cout << Y << std::endl;
+
+	B = Fraction(8);
+#endif // CONVERSION_FROM_OTHER_TO_CLASS
+	
+	Fraction Y(52, 10);
+	int y = (int)Y;
+	std::cout << y << std::endl;
+
+	Fraction Z(2, 3, 4);
+	double z = Z;
+	std::cout << z << std::endl;
 
 	//Fraction X;
 	//std::cout << "Введите простую дробь: "; std::cin >> X;
