@@ -19,6 +19,13 @@ public:
 	{
 		return str;
 	}
+	char* get_str()
+	{
+		return str;
+	}
+	
+	
+	
 
 	//Constructors:
 	String(int size = 80)
@@ -41,6 +48,7 @@ public:
 	}
 	String(const String& other)
 	{
+		// DeepCopy
 		this->size = other.size;
 		this->str = new char[size] {};
 		for (int i = 0; i < size; i++)
@@ -48,6 +56,26 @@ public:
 			this->str[i] = other.str[i];
 		}
 		std::cout << "CopyConstructor:\t" << this << std::endl;
+	}
+	const char& operator[](int i)const
+	{
+		return str[i];
+		if (i >= size)
+
+			return str[i];
+	}
+	char& operator[](int i)
+	{
+		return str[i];
+	}
+	String(String&& other) 
+		//Shellow Copy
+	{
+		this->size = other.size;
+		this->str = other.str;
+		other.size = 0;
+		other.str = nullptr;
+		std::cout << "MoveConstructor:" <<std::endl;
 	}
 
 	~String()
@@ -88,11 +116,18 @@ std::ostream& operator<<(std::ostream& os, const String& obj)
 }
 
 
-String operator +(String left, String right)
+String operator +( const String left, const String right)
 {
-	String result(right.get_size() + left.get_size() - 1);
-	
-	return result;
+	 String cat(left.get_size() + right.get_size() - 1);
+	for (int i = 0; i < left.get_size(); i++)
+	{
+		cat[i] = left[i];
+	}
+	for (int i = 0; i < right.get_size(); i++)
+	{
+		cat[left.get_size() - 1 + i] = right[i];
+	}
+	return cat;
 }
 
 
