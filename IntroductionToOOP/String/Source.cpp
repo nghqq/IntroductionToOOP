@@ -99,14 +99,24 @@ public:
 		std::cout << "CopyAssignment: \t" << std::endl;
 		return *this;
 	}
-	String& operator = (String&& other) 
+	String& operator =(String&& other) 
 	{
-		if (this == &other) return *this;
+		if (this == &other)return *this;
+		delete[]this->str;
 		this->size = other.size;
-		this->str = other.str;
-		other.size = 0;
-		other.str = nullptr;
-		std::cout << "MoveAssignment: \t" << std::endl;
+		this->str = new char[size] {};
+		for (int i = 0; i < size; i++)
+		{
+			this->str[i] = other.str[i];
+		}
+		std::cout << "CopyAssignment: \t" << std::endl;
+		return *this;
+	}
+
+	String& operator +=(const String& obj) 
+	{
+		
+		return *this = *this + obj;
 	}
 
 
@@ -166,10 +176,12 @@ void main()
 
 	String str_1 = "Hello";
 	String str_2 = "World";
-	String str_3 = str_1 + str_2;
+	//String str_3 = str_1 + str_2;
 
-	std::cout << str_3 << std::endl;
+	//std::cout << str_3 << std::endl;
 
+	str_1 += str_2;
+	std::cout << str_1 << std::endl;
 }
 
 
