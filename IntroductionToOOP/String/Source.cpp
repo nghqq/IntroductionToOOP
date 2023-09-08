@@ -180,8 +180,11 @@ void main()
 
 	//std::cout << str_3 << std::endl;
 
-	str_1 += str_2;
-	std::cout << str_1 << std::endl;
+
+	//str_1 += str_2;
+	//std::cout << str_1 << std::endl;
+
+
 }
 
 

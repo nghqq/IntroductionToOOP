@@ -5,6 +5,8 @@
 class Fraction;
 Fraction operator *(Fraction left, Fraction right);
 Fraction operator /(const Fraction& left, const Fraction& right);
+Fraction operator +(Fraction left, Fraction right);
+Fraction operator -(Fraction left, Fraction right);
 
 
 class Fraction 
@@ -116,6 +118,14 @@ public:
 	Fraction& operator/=(const Fraction& other) 
 	{
 		return *this = *this / other;
+	}
+	Fraction& operator-=(const Fraction& other) 
+	{
+		return *this = *this - other;
+	}
+	Fraction& operator+=(const Fraction& other) 
+	{
+		return *this = *this + other;
 	}
 	
 
@@ -338,21 +348,22 @@ std::istream& operator>>(std::istream& is, Fraction& obj)
 }
 
 
-Fraction operator +(Fraction left, Fraction right) 
+Fraction operator +(Fraction left, Fraction right)
 {
 	left.to_improper();
 	right.to_improper();
 	Fraction result;
 	result.set_numerator(left.get_numerator() * right.get_denominator() + right.get_numerator() * left.get_denominator());
-	if (left.get_denominator() * right.get_denominator()== right.get_denominator() * left.get_denominator())
+	if (left.get_denominator() * right.get_denominator() == right.get_denominator() * left.get_denominator())
 	{
 		result.set_denominator(left.get_denominator() * right.get_denominator());
 
 	}
-	
 	result.to_proper();
 	return result;
 }
+	
+	
 
 Fraction operator -(Fraction left, Fraction right) 
 {
@@ -445,8 +456,18 @@ void main()
 	//std::cout << "Введите простую дробь: "; std::cin >> X;
 	//std::cout << X << std::endl;
 
-	Fraction B(2, 3, 4);
-	std::cout << B << std::endl;
-	Fraction A = 2.75;
-	std::cout << A << std::endl;
+	//Fraction B(2, 3, 4);
+	//std::cout << B << std::endl;
+	//Fraction A = 2.75;
+	//std::cout << A << std::endl;
+
+	//Fraction A(2, 3, 4);
+	//Fraction B(3, 4, 5);
+	//std::cout << (Fraction(1, 2) > Fraction(5, 10)) << std::endl;
+
+
+	Fraction A(2, 3, 4);
+	Fraction B(3, 4, 5);
+	std::cout << A + B << std::endl;
+	
 }
