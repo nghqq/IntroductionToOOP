@@ -27,83 +27,56 @@ public:
 	{
 		return str;
 	}
-	
-	
-	
 
 	//Constructors:
-	String(int size = 80)
+	explicit String(int size = 80):size(size),str(new char[size]{})
 	{
-		this->size = size;
-		this->str = new char[size] {};
-		std::cout << "DefaultConstuctor: \t" << this << std::endl;
+		//this->size = size;
+		//this->str = new char[size] {};
+		std::cout << "DefaultConstruct:" << this << std::endl;
 	}
-
-	String(const char* str)
+	String(const char* str): size(strlen(str)+1),str(new char[size]{})
 	{
-		this->size = strlen(str) + 1;
-		this->str = new char[size] {};
-
-		for (int i = 0; str[i]; i++)
-		{
-			this->str[i] = str[i];
-		}
-		std::cout << "Constuctor: \t" << this << std::endl;
+		//this->size = strlen(str) + 1;
+		//this->str = new char[size] {};
+		for (int i = 0; str[i]; i++)this->str[i] = str[i];
+		std::cout << "Constructor:\t" << this << std::endl;
 	}
-	String(const String& other)
+	String(const String& other):size(other.size),str(new char[size]{})
 	{
-		// DeepCopy
-		this->size = other.size;
-		this->str = new char[size] {};
-		for (int i = 0; i < size; i++)
-		{
-			this->str[i] = other.str[i];
-		}
-		std::cout << "CopyConstructor:\t" << this << std::endl;
+		//Deep copy
+		//this->size = other.size;
+		//this->str = new char[size] {};
+		for (int i = 0; i < size; i++)this->str[i] = other.str[i];
+		std::cout << "CopyConstructor:" << this << std::endl;
 	}
-	const char& operator[](int i)const
+	String(String&& other):size(other.size),str(other.str)
 	{
-		return str[i];
-		if (i >= size)
-
-			return str[i];
-	}
-	char& operator[](int i)
-	{
-		return str[i];
-	}
-	String(String&& other) 
-		//Shellow Copy
-	{
-		this->size = other.size;
-		this->str = other.str;
+		//Shallow copy
+		//this->size = other.size;
+		//this->str = other.str;
 		other.size = 0;
 		other.str = nullptr;
-		std::cout << "MoveConstructor:" <<std::endl;
+		std::cout << "MoveConstructor:" << this << std::endl;
 	}
-
 	~String()
 	{
 		delete[] str;
-		std::cout << "Destructor: \t" << this << std::endl;
+		std::cout << "Destructor:\t" << this << std::endl;
 	}
 
-	// Operators
-
+	//						Operators:
 	String& operator=(const String& other)
 	{
 		if (this == &other)return *this;
-		delete[]this->str;
+		delete[] this->str;
 		this->size = other.size;
 		this->str = new char[size] {};
-		for (int i = 0; i < size; i++)
-		{
-			this->str[i] = other.str[i];
-		}
-		std::cout << "CopyAssignment: \t" << std::endl;
+		for (int i = 0; i < size; i++)this->str[i] = other.str[i];
+		std::cout << "CopyAssignment:\t" << this << std::endl;
 		return *this;
 	}
-	String& operator =(String&& other) 
+	String& operator=(String&& other)
 	{
 		if (this == &other)return *this;
 		this->size = other.size;
@@ -113,10 +86,14 @@ public:
 		std::cout << "MoveAssignment:\t" << this << std::endl;
 	}
 
-	String& operator +=(const String& obj) 
+	char operator[](int i)const
 	{
-		
-		return *this = *this + obj;
+		return str[i];
+	}
+	char& operator[](int i)
+	{
+		if (i >= size)throw std::out_of_range("Error:");
+		return str[i];
 	}
 
 
@@ -125,7 +102,7 @@ public:
 	void print()const
 	{
 		std::cout << "Size: \t" << size << std::endl;
-		std::cout << "Str: \t" << size << std::endl;
+		std::cout << "Str: \t" << str << std::endl;
 	}
 
 };
@@ -151,6 +128,8 @@ String operator +( const String left, const String right)
 
 
 //#define CONSTRUCTOR_CHECK
+//#define PLUSr_CHECK
+#define CHECK
 void main()
 {
 	setlocale(LC_ALL, "");
@@ -173,17 +152,42 @@ void main()
 	str_3 = str_2;						//CopyAssignment
 	std::cout << str_3 << std::endl;
 #endif // CONSTRUCTOR_CHECK
+#ifdef PLUSr_CHECK
 
 	String str_1 = "Hello";
 	String str_2 = "World";
-	//String str_3 = str_1 + str_2;
+	String str_3 = str_1 + str_2;
 
-	//std::cout << str_3 << std::endl;
+	std::cout << str_3 << std::endl;
 
 
 	//str_1 += str_2;
 	//std::cout << str_1 << std::endl;
 
+
+#endif // PLUS=_CHECK
+
+
+#ifdef CHECK
+	String str_1;   // DefaultConstructor
+	str_1.print();
+
+	String str_2(5);  // SingleArgumentConstructor
+	str_2.print();
+
+	String str_3 = "Hello"; // SingleArgumentConstructor
+	str_3.print();
+
+	String str_4(); // Здесь не создаётся никакой объект, здесь объявляется функция 'str_4()',
+	// которая ничего не принимает, и возвращает объект класса 'String';
+//str_4().print();
+
+	String str_5{};
+	str_5.print();
+
+	String str_6("World");
+	str_6.print();
+#endif // CHECK
 
 }
 
