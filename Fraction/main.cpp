@@ -45,55 +45,66 @@ public:
 
 	//Constructor
 
-	Fraction() 
+	Fraction():integer(0),numerator(0),denominator(1)
 	{
-		this->integer = 0;
-		this->numerator = 0;
-		this->denominator = 1;
+		//this->integer = 0;
+		//this->numerator = 0;
+		//this->denominator = 1;
 		std::cout << "DefaultContstuctor: \t" << this << std::endl;
 	}
-	Fraction(double decimal) 
+	Fraction(double decimal):integer(decimal),denominator(1e+9),numerator(decimal)
 	{
 		decimal += 1e-10;
-		integer = decimal;
+		//integer = decimal;
 		decimal -= integer;
-		denominator = 1e+9;
+		//denominator = 1e+9;
 		numerator = decimal * denominator;
 		reduce();
 		std::cout << "DoubleContstuctor: \t" << this << std::endl;
 	}
 
-	explicit Fraction(int integer)
+	explicit Fraction(int integer) : integer(integer), numerator(0), denominator(1)
 	{
-		this->integer = integer;
-		this->numerator = 0;
-		this->denominator = 1;
+		//this->integer = integer;
+		//this->numerator = 0;
+		//this->denominator = 1;
 		std::cout << "SingleArgumentContstuctor: \t" << this << std::endl;
 	}
 
-	Fraction(int numerator,int denominator)
+	Fraction(int numerator, int denominator): integer(0), numerator(numerator),denominator(denominator)
 	{
-		this->integer = 0;
-		this->numerator = numerator;
-		set_denominator(denominator);
+		//this->integer = 0;
+		//this->numerator = numerator;
+		//set_denominator(denominator);
 	}
 
-	Fraction(int integer, int numerator, int denominator) 
+	Fraction(int integer, int numerator, int denominator):integer(integer),numerator(numerator), denominator(denominator)
 	{
-		this->integer = integer;
-		this->numerator = numerator;
-		set_denominator(denominator);
+		//this->integer = integer;
+		//this->numerator = numerator;
+		//set_denominator(denominator);
 		std::cout << "Constructor: \t" << this << std::endl;
 	}
-	Fraction(const Fraction& other) 
+	Fraction(const Fraction& other): integer(other.integer),numerator(other.numerator),denominator(other.denominator)
 	{
-		this->integer = other.integer;
-		this->numerator = other.numerator;
-		this->denominator = other.denominator;
+		// DeepCopy
+		//this->integer = other.integer;
+		//this->numerator = other.numerator;
+		//this->denominator = other.denominator;
 		std::cout << "CopyConstructor: \t" << this << std::endl;
 	}
+	Fraction(Fraction&& other): integer(other.integer), numerator(other.numerator), denominator(other.denominator)
+	{
+		//Shallow Copy
+		//this->integer = other.integer;
+		//this->numerator = other.numerator;
+		//this->denominator = other.denominator;
+		other.integer = 0;
+		other.numerator = 0;
+		other.denominator = 0;
+		std::cout << "MoveConstructor: \t" << this << std::endl;
+	}
 	
-
 	~Fraction() 
 	{
 		std::cout << "Destructor: \t" << this << std::endl;
@@ -384,14 +395,14 @@ Fraction operator -(Fraction left, Fraction right)
 //#define CONSTRUCTORS_CHECK
 //#define CONVERSION_FROM_OTHER_TO_CLASS
 //#define CONVERSION_FROM_CLASS_TO_OTHER
-void main() 
+void main()
 {
 	setlocale(LC_ALL, "");
 #ifdef CONSTRUCTORS_CHECK
-	Fraction A;
+	Fraction A;  // DefaultConstuctor
 	A.print();
 
-	Fraction B = 5;
+	Fraction B = 5;   //SingleArgument constructor
 	B.print();
 
 	Fraction C(1, 2);
@@ -466,8 +477,27 @@ void main()
 	//std::cout << (Fraction(1, 2) > Fraction(5, 10)) << std::endl;
 
 
-	Fraction A(2, 3, 4);
-	Fraction B(3, 4, 5);
-	std::cout << A + B << std::endl;
+	//Fraction A(2, 3, 4);
+	//Fraction B(3, 4, 5);
+	//std::cout << A + B << std::endl;
+
+	Fraction A;   
+	A.print();
+	
+
+	Fraction B(5);
+	B.print();
+	
+	Fraction C(2.75);
+	C.print();
+
+	Fraction F(2, 3, 4);
+	F.print();
+
+	Fraction G = F;
+	G.print();
+
+	A = F;
+	A.print();
 	
 }
