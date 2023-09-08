@@ -1,5 +1,9 @@
 #include<iostream>
 
+
+class String;
+String operator +(const String left, const String right);
+
 class String
 {
 	int size; // размер строки
@@ -102,15 +106,11 @@ public:
 	String& operator =(String&& other) 
 	{
 		if (this == &other)return *this;
-		delete[]this->str;
 		this->size = other.size;
-		this->str = new char[size] {};
-		for (int i = 0; i < size; i++)
-		{
-			this->str[i] = other.str[i];
-		}
-		std::cout << "CopyAssignment: \t" << std::endl;
-		return *this;
+		this->str = other.str;
+		other.size = 0;
+		other.str = nullptr;
+		std::cout << "MoveAssignment:\t" << this << std::endl;
 	}
 
 	String& operator +=(const String& obj) 
