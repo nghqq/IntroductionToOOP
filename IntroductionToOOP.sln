@@ -9,7 +9,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Fraction", "Fraction\Fracti
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "testFraction", "testFraction\testFraction.vcxproj", "{B4FD05C5-A869-4C51-A1E2-E066E5CD9627}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "String", "IntroductionToOOP\String\String.vcxproj", "{6115B7F8-FBF4-41AD-90E2-9D00C506C77E}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "String", "String\String.vcxproj", "{6115B7F8-FBF4-41AD-90E2-9D00C506C77E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
